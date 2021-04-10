@@ -93,8 +93,8 @@ namespace CppCLRWinformsProjekt
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(17, 16);
-			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button1->Location = System::Drawing::Point(17, 13);
+			this->button1->Margin = System::Windows::Forms::Padding(4);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(400, 75);
 			this->button1->TabIndex = 0;
@@ -104,8 +104,8 @@ namespace CppCLRWinformsProjekt
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(425, 18);
-			this->button2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button2->Location = System::Drawing::Point(425, 13);
+			this->button2->Margin = System::Windows::Forms::Padding(4);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(400, 75);
 			this->button2->TabIndex = 1;
@@ -115,8 +115,8 @@ namespace CppCLRWinformsProjekt
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(833, 18);
-			this->button3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button3->Location = System::Drawing::Point(833, 13);
+			this->button3->Margin = System::Windows::Forms::Padding(4);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(400, 75);
 			this->button3->TabIndex = 2;
@@ -127,10 +127,10 @@ namespace CppCLRWinformsProjekt
 			// pictureBox1
 			// 
 			this->pictureBox1->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox1->Location = System::Drawing::Point(17, 100);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->pictureBox1->Location = System::Drawing::Point(17, 96);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(4);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(288, 375);
+			this->pictureBox1->Size = System::Drawing::Size(400, 375);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
@@ -138,10 +138,10 @@ namespace CppCLRWinformsProjekt
 			// pictureBox2
 			// 
 			this->pictureBox2->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox2->Location = System::Drawing::Point(313, 100);
-			this->pictureBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->pictureBox2->Location = System::Drawing::Point(425, 96);
+			this->pictureBox2->Margin = System::Windows::Forms::Padding(4);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(316, 375);
+			this->pictureBox2->Size = System::Drawing::Size(400, 375);
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox2->TabIndex = 4;
 			this->pictureBox2->TabStop = false;
@@ -149,10 +149,10 @@ namespace CppCLRWinformsProjekt
 			// pictureBox3
 			// 
 			this->pictureBox3->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox3->Location = System::Drawing::Point(637, 100);
-			this->pictureBox3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->pictureBox3->Location = System::Drawing::Point(833, 96);
+			this->pictureBox3->Margin = System::Windows::Forms::Padding(4);
 			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(297, 375);
+			this->pictureBox3->Size = System::Drawing::Size(400, 375);
 			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox3->TabIndex = 5;
 			this->pictureBox3->TabStop = false;
@@ -167,13 +167,10 @@ namespace CppCLRWinformsProjekt
 			// 
 			// pictureBox4
 			// 
-			this->pictureBox4->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox4->Location = System::Drawing::Point(942, 100);
-			this->pictureBox4->Margin = System::Windows::Forms::Padding(4);
+			this->pictureBox4->Location = System::Drawing::Point(0, 0);
 			this->pictureBox4->Name = L"pictureBox4";
-			this->pictureBox4->Size = System::Drawing::Size(297, 375);
-			this->pictureBox4->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox4->TabIndex = 6;
+			this->pictureBox4->Size = System::Drawing::Size(100, 50);
+			this->pictureBox4->TabIndex = 0;
 			this->pictureBox4->TabStop = false;
 			// 
 			// Form1
@@ -181,14 +178,13 @@ namespace CppCLRWinformsProjekt
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1251, 491);
-			this->Controls->Add(this->pictureBox4);
 			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Form1";
 			this->Text = L"Form1";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
@@ -258,7 +254,7 @@ namespace CppCLRWinformsProjekt
 	private: void BackgroundSubtraction(cv::Mat input)
 	{
 
-		cv::Mat process = input.clone();
+		cv::Mat process = cv::Mat(input.rows, input.cols, CV_8UC1);
 		uchar* idata = input.data;
 		uchar* pdata = process.data;
 		uchar* fdata = first_image.data;
@@ -267,7 +263,7 @@ namespace CppCLRWinformsProjekt
 		{
 			for (int x = 0; x < process.cols; x++)
 			{
-				data = &idata[0] - &fdata[0];
+				data = idata[0] - fdata[0];
 				pdata[0] = abs(data);
 				fdata++;
 				pdata++;
@@ -278,7 +274,7 @@ namespace CppCLRWinformsProjekt
 	}
 	private: void WTF(cv::Mat input)
 	{
-		cv::Mat process = input.clone();
+		cv::Mat process = cv::Mat(input.rows, input.cols, CV_8UC1);
 		uchar* idata = input.data;
 		uchar* pdata = process.data;
 		uchar* ldata = last_image.data;
@@ -287,7 +283,7 @@ namespace CppCLRWinformsProjekt
 		{
 			for (int x = 0; x < process.cols; x++)
 			{
-				data = &idata[0] - &ldata[0];
+				data = idata[0] - ldata[0];
 				pdata[0] = abs(data);
 				ldata++;
 				pdata++;
