@@ -15,7 +15,7 @@ namespace CppCLRWinformsProjekt
 	cv::VideoCapture vc;
 	cv::Mat input;
 	cv::Mat output;
-	cv::Mat output_2; 
+	cv::Mat output_2;
 	cv::Mat output_3;
 	cv::Mat first_image;
 	cv::Mat last_image;
@@ -209,6 +209,8 @@ namespace CppCLRWinformsProjekt
 			fps = vc.get(cv::CAP_PROP_FPS);
 			frame_counts = vc.get(cv::CAP_PROP_FRAME_COUNT);
 			timer1->Interval = 5;
+			first_image.release();
+			last_image.release();
 		}
 	}
 	private: void Reset()
