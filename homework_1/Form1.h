@@ -1,4 +1,6 @@
 ﻿#include<opencv/cv.hpp>
+#include<vector>
+#include <algorithm> 
 #pragma once
 
 namespace CppCLRWinformsProjekt
@@ -11,12 +13,15 @@ namespace CppCLRWinformsProjekt
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Drawing::Imaging;
+	using namespace System::Collections::Generic;
 
 	cv::VideoCapture vc;
 	cv::Mat input;
 	cv::Mat output;
 	cv::Mat output_2;
 	cv::Mat output_3;
+	cv::Mat output_4;
+	cv::Mat output_5;
 	cv::Mat first_image;
 	cv::Mat last_image;
 	long frame_counts;
@@ -58,6 +63,8 @@ namespace CppCLRWinformsProjekt
 	private: System::ComponentModel::IContainer^ components;
 	private: Bitmap^ gray;
 	private: System::Windows::Forms::PictureBox^ pictureBox4;
+	private: System::Windows::Forms::PictureBox^ pictureBox5;
+	private: System::Windows::Forms::PictureBox^ pictureBox6;
 	private: ColorPalette^ cp;
 
 	protected:
@@ -85,18 +92,21 @@ namespace CppCLRWinformsProjekt
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox5 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox6 = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(17, 13);
-			this->button1->Margin = System::Windows::Forms::Padding(4);
+			this->button1->Location = System::Drawing::Point(13, 10);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(400, 75);
+			this->button1->Size = System::Drawing::Size(300, 60);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Open file";
 			this->button1->UseVisualStyleBackColor = true;
@@ -104,10 +114,9 @@ namespace CppCLRWinformsProjekt
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(425, 13);
-			this->button2->Margin = System::Windows::Forms::Padding(4);
+			this->button2->Location = System::Drawing::Point(319, 10);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(400, 75);
+			this->button2->Size = System::Drawing::Size(300, 60);
 			this->button2->TabIndex = 1;
 			this->button2->Text = L"Play";
 			this->button2->UseVisualStyleBackColor = true;
@@ -115,10 +124,9 @@ namespace CppCLRWinformsProjekt
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(833, 13);
-			this->button3->Margin = System::Windows::Forms::Padding(4);
+			this->button3->Location = System::Drawing::Point(625, 10);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(400, 75);
+			this->button3->Size = System::Drawing::Size(300, 60);
 			this->button3->TabIndex = 2;
 			this->button3->Text = L"Reset";
 			this->button3->UseVisualStyleBackColor = true;
@@ -127,10 +135,9 @@ namespace CppCLRWinformsProjekt
 			// pictureBox1
 			// 
 			this->pictureBox1->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox1->Location = System::Drawing::Point(17, 96);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(4);
+			this->pictureBox1->Location = System::Drawing::Point(13, 77);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(400, 375);
+			this->pictureBox1->Size = System::Drawing::Size(172, 300);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
@@ -138,10 +145,9 @@ namespace CppCLRWinformsProjekt
 			// pictureBox2
 			// 
 			this->pictureBox2->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox2->Location = System::Drawing::Point(425, 96);
-			this->pictureBox2->Margin = System::Windows::Forms::Padding(4);
+			this->pictureBox2->Location = System::Drawing::Point(191, 76);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(400, 375);
+			this->pictureBox2->Size = System::Drawing::Size(206, 300);
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox2->TabIndex = 4;
 			this->pictureBox2->TabStop = false;
@@ -149,10 +155,9 @@ namespace CppCLRWinformsProjekt
 			// pictureBox3
 			// 
 			this->pictureBox3->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox3->Location = System::Drawing::Point(833, 96);
-			this->pictureBox3->Margin = System::Windows::Forms::Padding(4);
+			this->pictureBox3->Location = System::Drawing::Point(403, 76);
 			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(400, 375);
+			this->pictureBox3->Size = System::Drawing::Size(203, 300);
 			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox3->TabIndex = 5;
 			this->pictureBox3->TabStop = false;
@@ -173,18 +178,39 @@ namespace CppCLRWinformsProjekt
 			this->pictureBox4->TabIndex = 0;
 			this->pictureBox4->TabStop = false;
 			// 
+			// pictureBox5
+			// 
+			this->pictureBox5->BackColor = System::Drawing::SystemColors::ControlLightLight;
+			this->pictureBox5->Location = System::Drawing::Point(612, 76);
+			this->pictureBox5->Name = L"pictureBox5";
+			this->pictureBox5->Size = System::Drawing::Size(138, 300);
+			this->pictureBox5->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox5->TabIndex = 6;
+			this->pictureBox5->TabStop = false;
+			// 
+			// pictureBox6
+			// 
+			this->pictureBox6->BackColor = System::Drawing::SystemColors::ControlLightLight;
+			this->pictureBox6->Location = System::Drawing::Point(756, 76);
+			this->pictureBox6->Name = L"pictureBox6";
+			this->pictureBox6->Size = System::Drawing::Size(170, 300);
+			this->pictureBox6->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox6->TabIndex = 7;
+			this->pictureBox6->TabStop = false;
+			// 
 			// Form1
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 15);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1251, 491);
+			this->ClientSize = System::Drawing::Size(938, 393);
+			this->Controls->Add(this->pictureBox6);
+			this->Controls->Add(this->pictureBox5);
 			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
-			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"Form1";
 			this->Text = L"Form1";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
@@ -192,6 +218,8 @@ namespace CppCLRWinformsProjekt
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -227,7 +255,7 @@ namespace CppCLRWinformsProjekt
 		}
 		else
 		{
-			Bitmap^ b = gcnew Bitmap(mat.cols, mat.rows, mat.step, PixelFormat::Format8bppIndexed, (IntPtr)mat.data);;
+			Bitmap^ b = gcnew Bitmap(mat.cols, mat.rows, mat.step, PixelFormat::Format8bppIndexed, (IntPtr)mat.data);
 			b->Palette = cp;
 			return b;
 		}
@@ -292,7 +320,139 @@ namespace CppCLRWinformsProjekt
 				idata++;
 			}
 		}
-		output_3 = process.clone();
+
+		output_3 = Boxer(process.clone());
+	}
+	private: List<int>^ IsOneOf(List<int>^ input)
+	{
+		List<int>^ process = gcnew List<int>();
+		for (int i = 0; i < input->Count; i++)
+		{
+			if (i == 0)
+			{
+				process->Add(input[i]);
+			}
+			else
+			{
+				bool single = 0;
+				for (int j = 0; j < process->Count; j++)
+				{
+					if (process[j] + 1 == input[i])
+					{
+						process->Add(input[i]);
+					}
+					if (process[j] - 1 == input[i])
+					{
+						process->Add(input[i]);
+					}
+					if (process[j] + output.cols == input[i])
+					{
+						process->Add(input[i]);
+					}
+					if (process[j] - output.cols == input[i])
+					{
+						process->Add(input[i]);
+					}
+				}
+
+			}
+		}
+		return  process;
+	}
+	private:List<List<int>^>^ ObjectSplit(List<int>^ input)
+	{
+		List<List<int>^>^ object_list = gcnew List<List<int>^>();//?
+		int a = 0;
+		while (input->Count || a < 100)
+		{
+			auto process = IsOneOf(input);
+			for (int i = 0; i < input->Count; i++)
+			{
+
+				for (int j = 0; j < process->Count; j++)
+				{
+					if (process[j] == input[i])
+					{
+						input->Remove(input[i]);
+					}
+				}
+			}
+			object_list->Add(process);
+			a++;
+		}
+		return object_list;
+	}
+	private: List<List<int>^>^ Scanner(cv::Mat& input)
+	{
+		List<int>^ box_location = gcnew List<int>();
+		auto idata = input.data;
+		for (int y = 0; y < input.rows; y++)
+		{
+			for (int x = 0; x < input.cols; x++)
+			{
+				if (idata[0] > 0)
+				{
+					box_location->Add(x + y * input.cols);
+				}
+				idata++;
+
+			}
+		}
+		return ObjectSplit(box_location);
+	}
+	private: cv::Mat Boxer(cv::Mat& input_mat)
+	{
+		auto input_object = Scanner(input_mat);
+		auto process = cv::Mat(input.rows, input.cols, CV_8UC1);
+		auto idata = input_mat.data;
+		auto pdata = process.data;
+		for (int i = 0; i < input_object->Count; i++)
+		{
+			List<int>^ process_x = gcnew List<int>();
+			List<int>^ process_y = gcnew List<int>();
+			for (int j = 0; j < input_object[i]->Count; j++)
+			{
+				auto a = input_object[i];
+				process_x->Add(a[j] % output.cols);
+				process_y->Add(a[j] / output.cols);
+			}
+			if (process_x->Count != 0 || process_y->Count != 0)
+			{
+				process_x->Sort();
+				process_y->Sort();
+				int left = process_x[0];
+				int right = process_x[process_x->Count - 1];
+				int top = process_y[0];
+				int down = process_y[process_y->Count - 1];
+				for (int y = 0; y < input_mat.rows; y++)
+				{
+					for (int x = 0; x < input_mat.cols; x++)
+					{
+						if (x == top)
+						{
+							if (x >= left && x <= left)
+							{
+								pdata[0] = 255;
+							}
+						}
+						if (x == down)
+						{
+							if (x >= left && x <= left)
+							{
+								pdata[0] = 255;
+							}
+						}
+						else
+						{
+							//pdata[0] = idata[0];
+						}
+						idata += 1;
+						pdata += 1;
+					}
+				}
+			}
+		}
+		return process;
 	}
 		   //-------------------------------------------------------------------------自動生成-------------------------------------------------------------
 	private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e)
@@ -345,6 +505,8 @@ namespace CppCLRWinformsProjekt
 		pictureBox1->Image = MatToBitmap(output);
 		pictureBox2->Image = MatToBitmap(output_2);
 		pictureBox3->Image = MatToBitmap(output_3);
+		//pictureBox5->Image = MatToBitmap(output_4);
+		//pictureBox6->Image = MatToBitmap(output_5);
 		last_image = output.clone();
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
