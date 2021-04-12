@@ -7,3 +7,6 @@ C:\Users\user\Desktop\homework_1\homework_1\x64\Debug\homework_1.vcxproj.Generat
 C:\Code\CLR\openCVisualStudio\homework_1\x64\Debug\homework_1.vcxprojAssemblyReference.cache
 C:\Code\CLR\openCVisualStudio\homework_1\x64\Debug\homework_1.Form1.resources
 C:\Code\CLR\openCVisualStudio\homework_1\x64\Debug\homework_1.vcxproj.GenerateResource.cache
+C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\x64\Debug\homework_1.vcxprojAssemblyReference.cache
+C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\x64\Debug\homework_1.Form1.resources
+C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\x64\Debug\homework_1.vcxproj.GenerateResource.cache

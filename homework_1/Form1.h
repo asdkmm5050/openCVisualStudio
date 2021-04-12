@@ -2,7 +2,27 @@
 #include<vector>
 #include <algorithm> 
 #pragma once
+class Box
+{
+public:
+	int top;
+	int down;
+	int left;
+	int right;
+	Box(int, int, int, int);
+	~Box();
+};
+Box::Box(int a, int b, int c, int d)
+{
+	this->top = a;
+	this->down = b;
+	this->left = c;
+	this->right = d;
+};
+Box::~Box()
+{
 
+};
 namespace CppCLRWinformsProjekt
 {
 
@@ -236,7 +256,7 @@ namespace CppCLRWinformsProjekt
 			vc = cv::VideoCapture(s);
 			fps = vc.get(cv::CAP_PROP_FPS);
 			frame_counts = vc.get(cv::CAP_PROP_FRAME_COUNT);
-			timer1->Interval = 5;
+			timer1->Interval = 1000 / fps;
 			first_image.release();
 			last_image.release();
 		}
@@ -293,8 +313,16 @@ namespace CppCLRWinformsProjekt
 		{
 			for (int x = 0; x < process.cols; x++)
 			{
-				data = idata[0] - fdata[0];
-				pdata[0] = abs(data);
+				data = abs(idata[0] - fdata[0]);
+				if (data > 40)
+				{
+					data = 255;
+				}
+				else
+				{
+					data = 0;
+				}
+				pdata[0] = (uchar)data;
 				fdata++;
 				pdata++;
 				idata++;
@@ -313,145 +341,85 @@ namespace CppCLRWinformsProjekt
 		{
 			for (int x = 0; x < process.cols; x++)
 			{
-				data = idata[0] - ldata[0];
-				pdata[0] = abs(data);
+				data = abs(idata[0] - ldata[0]);
+				if (data > 30)
+				{
+					data = 255;
+				}
+				else
+				{
+					data = 0;
+				}
+				pdata[0] = data;
 				ldata++;
 				pdata++;
 				idata++;
 			}
 		}
-
-		output_3 = Boxer(process.clone());
-	}
-	private: List<int>^ IsOneOf(List<int>^ input)
-	{
-		List<int>^ process = gcnew List<int>();
-		for (int i = 0; i < input->Count; i++)
-		{
-			if (i == 0)
-			{
-				process->Add(input[i]);
-			}
-			else
-			{
-				bool single = 0;
-				for (int j = 0; j < process->Count; j++)
-				{
-					if (process[j] + 1 == input[i])
-					{
-						process->Add(input[i]);
-					}
-					if (process[j] - 1 == input[i])
-					{
-						process->Add(input[i]);
-					}
-					if (process[j] + output.cols == input[i])
-					{
-						process->Add(input[i]);
-					}
-					if (process[j] - output.cols == input[i])
-					{
-						process->Add(input[i]);
-					}
-				}
-
-			}
-		}
-		return  process;
-	}
-	private:List<List<int>^>^ ObjectSplit(List<int>^ input)
-	{
-		List<List<int>^>^ object_list = gcnew List<List<int>^>();//?
-		int a = 0;
-		while (input->Count || a < 100)
-		{
-			auto process = IsOneOf(input);
-			for (int i = 0; i < input->Count; i++)
-			{
-
-				for (int j = 0; j < process->Count; j++)
-				{
-					if (process[j] == input[i])
-					{
-						input->Remove(input[i]);
-					}
-				}
-			}
-			object_list->Add(process);
-			a++;
-		}
-		return object_list;
+		process = Boxer(process.clone());
+		output_3 = process;
 	}
 	private: List<List<int>^>^ Scanner(cv::Mat& input)
 	{
-		List<int>^ box_location = gcnew List<int>();
+		List<List<int>^>^ axis = gcnew List<List<int>^>();
 		auto idata = input.data;
 		for (int y = 0; y < input.rows; y++)
 		{
 			for (int x = 0; x < input.cols; x++)
 			{
-				if (idata[0] > 0)
+				if (idata[0] == 0 && idata[1] > 0)
 				{
-					box_location->Add(x + y * input.cols);
+					Box box(0, 0, 0, 0);
+				}
+				if (idata[0] > 0 && idata[1] == 0)
+				{
+
 				}
 				idata++;
-
 			}
 		}
-		return ObjectSplit(box_location);
+		idata = input.data;
+		for (int x = 0; x < input.cols; x++)
+		{
+			for (int y = 0; y < input.rows; y++)
+			{
+				idata = input.data + y * input.cols + x;
+			}
+		}
+
+		return axis;
 	}
-	private: cv::Mat Boxer(cv::Mat& input_mat)
+	private: cv::Mat Boxer(cv::Mat input_mat/*, std::vector<Box>box*/)
 	{
-		auto input_object = Scanner(input_mat);
-		auto process = cv::Mat(input.rows, input.cols, CV_8UC1);
+		auto process = input_mat.clone();//cv::Mat(input.rows, input.cols, CV_8UC1);
 		auto idata = input_mat.data;
 		auto pdata = process.data;
-		for (int i = 0; i < input_object->Count; i++)
+		Box a(1, 10, 3, 30);
+		std::vector<Box>box;
+		box.push_back(a);
+		for (int y = 0; y < input_mat.rows; y++)
 		{
-			List<int>^ process_x = gcnew List<int>();
-			List<int>^ process_y = gcnew List<int>();
-			for (int j = 0; j < input_object[i]->Count; j++)
+			for (int x = 0; x < input_mat.cols; x++)
 			{
-				auto a = input_object[i];
-				process_x->Add(a[j] % output.cols);
-				process_y->Add(a[j] / output.cols);
-			}
-			if (process_x->Count != 0 || process_y->Count != 0)
-			{
-				process_x->Sort();
-				process_y->Sort();
-				int left = process_x[0];
-				int right = process_x[process_x->Count - 1];
-				int top = process_y[0];
-				int down = process_y[process_y->Count - 1];
-				for (int y = 0; y < input_mat.rows; y++)
+				for (int i = 0; i < box.size(); i++)
 				{
-					for (int x = 0; x < input_mat.cols; x++)
+					if (y > box[i].top && y < box[i].down)
 					{
-						if (x == top)
+						if (x > box[i].left && x < box[i].right)
 						{
-							if (x >= left && x <= left)
-							{
-								pdata[0] = 255;
-							}
-						}
-						if (x == down)
-						{
-							if (x >= left && x <= left)
-							{
-								pdata[0] = 255;
-							}
+							pdata[0] = 255;
 						}
 						else
 						{
-							//pdata[0] = idata[0];
+							pdata[0] = 0;
 						}
-						idata += 1;
-						pdata += 1;
 					}
 				}
+				idata += 1;
+				pdata += 1;
 			}
 		}
+		
 		return process;
 	}
 		   //-------------------------------------------------------------------------自動生成-------------------------------------------------------------
