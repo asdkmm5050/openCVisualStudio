@@ -1,14 +1,10 @@
-﻿  pch.cpp
-  AssemblyInfo.cpp
-  CppCLR_WinformsProjekt.cpp
+﻿  CppCLR_WinformsProjekt.cpp
 C:\opencv\build\include\opencv2\calib3d.hpp(1,1): warning C4819: 檔案含有無法在目前字碼頁 (950) 中表示的字元。請以 Unicode 格式儲存檔案以防止資料遺失
-C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(238,25): warning C4244: '=': 將 'double' 轉換為 'long'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(254,1): warning C4267: '引數': 將 'size_t' 轉換為 'int'，資料可能遺失
-C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(258,1): warning C4267: '引數': 將 'size_t' 轉換為 'int'，資料可能遺失
-C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(276,15): warning C4244: '正在初始化': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
-C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(501,16): warning C4244: '正在初始化': 將 'double' 轉換為 'long'，由於類型不同，可能導致資料遺失
-  Form1.cpp
-  正在產生程式碼...
+C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(250,25): warning C4244: '=': 將 'double' 轉換為 'long'，由於類型不同，可能導致資料遺失
+C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(266,1): warning C4267: '引數': 將 'size_t' 轉換為 'int'，資料可能遺失
+C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(270,1): warning C4267: '引數': 將 'size_t' 轉換為 'int'，資料可能遺失
+C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(288,15): warning C4244: '正在初始化': 將 'double' 轉換為 'int'，由於類型不同，可能導致資料遺失
+C:\Users\user\Desktop\CLR\openCVisualStudio\homework_1\Form1.h(561,16): warning C4244: '正在初始化': 將 'double' 轉換為 'long'，由於類型不同，可能導致資料遺失
 C:\opencv\build\include\opencv2\core\cvstd.hpp(575): warning C4793: 'cv::String::String': 函式會編譯成機器碼:
   	找到受控碼中不支援的內建
 C:\opencv\build\include\opencv2\core\mat.inl.hpp(576): warning C4793: 'cv::Mat::Mat': 函式會編譯成機器碼:
@@ -23,8 +19,9 @@ C:\opencv\build\include\opencv2\core\ptr.inl.hpp(72): warning C4793: 'cv::detail
   	找到受控碼中不支援的內建
 C:\opencv\build\include\opencv2\core\ptr.inl.hpp(67): warning C4793: 'cv::detail::PtrOwner::incRef': 函式會編譯成機器碼:
   	找到受控碼中不支援的內建
-  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
+C:\opencv\build\include\opencv2\core\mat.inl.hpp(798): warning C4793: 'cv::Mat::operator=': 函式會編譯成機器碼:
+  	找到受控碼中不支援的內建
   AssemblyInfo.obj : 發現 MSIL 模組。MSIL 的累加連結已停用。正在執行完整連結
-CppCLR_WinformsProjekt.obj : warning LNK4248: 無法解析的 typeref 語彙基元 (01000025) (對 'CvCapture' 而言)，映像可能無法執行
-CppCLR_WinformsProjekt.obj : warning LNK4248: 無法解析的 typeref 語彙基元 (01000026) (對 'cv.IVideoCapture' 而言)，映像可能無法執行
+CppCLR_WinformsProjekt.obj : warning LNK4248: 無法解析的 typeref 語彙基元 (01000024) (對 'CvCapture' 而言)，映像可能無法執行
+CppCLR_WinformsProjekt.obj : warning LNK4248: 無法解析的 typeref 語彙基元 (01000025) (對 'cv.IVideoCapture' 而言)，映像可能無法執行
   homework_1.vcxproj -> C:\Users\user\Desktop\CLR\openCVisualStudio\x64\Debug\homework_1.exe

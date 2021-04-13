@@ -14,9 +14,9 @@ Box::~Box()
 {
 
 };
+
 namespace CppCLRWinformsProjekt
 {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -235,6 +235,7 @@ namespace CppCLRWinformsProjekt
 
 		}
 #pragma endregion
+
 	private: void OpenFile()
 	{
 		openFileDialog1->FileName = "";
@@ -247,7 +248,7 @@ namespace CppCLRWinformsProjekt
 			vc = cv::VideoCapture(s);
 			fps = vc.get(cv::CAP_PROP_FPS);
 			frame_counts = vc.get(cv::CAP_PROP_FRAME_COUNT);
-			timer1->Interval = 1000 / fps;
+			timer1->Interval = 1;
 			first_image.release();
 			last_image.release();
 		}
@@ -347,12 +348,61 @@ namespace CppCLRWinformsProjekt
 				idata++;
 			}
 		}
-		process = Boxer(process.clone());
+		//std::vector<Box> box = Scanner(process.clone());
+		process = DrawBox(process.clone());
 		output_3 = process;
 	}
-	private: std::vector<std::vector<int>> Scanner(cv::Mat& input)
+	private: std::vector<Box>CreateBox(std::vector<int>process_x, std::vector<int>process_y, cv::Mat input)
 	{
-		std::vector<std::vector<int>> boxes;
+		button3->Text = "CreateBox";
+		std::vector<Box>boxes;
+		int ii = -1, jj = -1;
+		for (int i = 0; i < process_x.size(); i++)
+		{
+			for (int j = i; j < process_x.size(); j++)
+			{
+				for (int x = process_x[i]; x < process_x[j]; x++)
+				{
+					for (int y = 0; y < input.rows; y++)
+					{
+						if (input.data[y * input.cols + x] != 0 && ii != i && jj != j)
+						{
+							Box box(0, 0, process_x[i], process_x[j]);
+							boxes.push_back(box);
+							ii = i;
+							jj = j;
+						}
+					}
+				}
+			}
+		}
+		ii = -1, jj = -1;
+		for (int i = 0; i < process_y.size(); i++)
+		{
+			for (int j = i; j < process_y.size(); j++)
+			{
+				for (int k = 0; k < boxes.size(); k++)
+				{
+					for (int x = boxes[k].left; x < boxes[k].right; x++)
+					{
+						for (int y = process_y[i]; y < process_y[j]; y++)
+						{
+							if (input.data[y * input.cols + x] != 0 && ii != i && jj != j)
+							{
+								boxes[k].top = process_y[i];
+								boxes[k].down = process_y[j];
+							}
+						}
+					}
+				}
+			}
+		}
+		return boxes;
+	}
+	private: std::vector<Box> Scanner(cv::Mat& input)
+	{
+		button3->Text = "Scanner";
+		std::vector<Box> boxes;
 		std::vector<int>process_x;
 		std::vector<int>process_y;
 		auto idata = input.data;
@@ -390,23 +440,64 @@ namespace CppCLRWinformsProjekt
 			}
 
 		}
+		std::sort(process_x.begin(), process_x.end());
+		std::sort(process_y.begin(), process_y.end());
+
+		boxes = CreateBox(process_x, process_y, input);
 
 
 		return boxes;
 	}
-	private: cv::Mat Boxer(cv::Mat input_mat/*, std::vector<Box>box*/)
+	private: cv::Mat DrawBox(cv::Mat input_mat/*, std::vector<Box>box*/)
 	{
-		auto process = input_mat.clone();//cv::Mat(input.rows, input.cols, CV_8UC1);
+		button3->Text = "drawbox";
+		auto process = input_mat.clone();
 		auto idata = input_mat.data;
 		auto pdata = process.data;
-		Box a(1, 10, 3, 30);
-		std::vector<Box>box;
-		box.push_back(a);
+		List<int>^ process_x = gcnew List<int>();
+		for (int i = 0; i < input.cols; i++)
+		{
+			process_x->Add(0);
+		}
+		std::vector<int>process_y;
+		for (int y = 0; y < input.rows; y++)
+		{
+			for (int x = 0; x < input.cols - 1; x++)
+			{
+				if ((idata[0] == 0 && idata[1] != 0) || (x == 0 && idata[0] != 0))
+				{
+					process_x[x] = 1;
+				}
+				if ((idata[0] != 0 && idata[1] == 0) || (x == input.rows && idata[0] != 0))
+				{
+					process_x[x] = 1;
+				}
+				idata++;
+			}
+		}
+		idata = input.data;
+		/*for (int x = 0; x < input.cols; x++)
+		{
+			for (int y = 0; y < input.rows - 1; y++)
+			{
+				idata = input.data + x + y * input.cols;
+				if ((idata[0] == 0 && idata[input.cols] != 0) || (y == 0 && idata[0] != 0))
+				{
+					process_y.push_back(y);
+				}
+				if ((idata[0] != 0 && idata[input.cols] == 0) || (y == input.cols && idata[0] != 0))
+				{
+					process_y.push_back(y);
+				}
+			}
+
+		}
+		idata = input.data;*/
 		for (int y = 0; y < input_mat.rows; y++)
 		{
 			for (int x = 0; x < input_mat.cols; x++)
 			{
-				for (int i = 0; i < box.size(); i++)
+				/*for (int i = 0; i < box.size(); i++)
 				{
 					if (y > box[i].top && y < box[i].down)
 					{
@@ -419,12 +510,22 @@ namespace CppCLRWinformsProjekt
 							pdata[0] = 0;
 						}
 					}
+				}*/
+				for (int i = 0; i < input.cols; i++)
+				{
+					if (process_x[x])
+					{
+						pdata[0] = 255;
+					}
+					else
+					{
+						pdata[0] = 0;
+					}
 				}
-				idata += 1;
+
 				pdata += 1;
 			}
 		}
-
 		return process;
 	}
 		   //-------------------------------------------------------------------------自動生成-------------------------------------------------------------
