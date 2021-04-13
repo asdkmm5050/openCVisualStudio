@@ -454,12 +454,17 @@ namespace CppCLRWinformsProjekt
 		auto process = input_mat.clone();
 		auto idata = input_mat.data;
 		auto pdata = process.data;
-		List<int>^ process_x = gcnew List<int>();
+		List<bool>^ process_x = gcnew List<bool>();
+		List<bool>^ process_y = gcnew List<bool>();
+
 		for (int i = 0; i < input.cols; i++)
 		{
 			process_x->Add(0);
 		}
-		std::vector<int>process_y;
+		for (int i = 0; i < input.rows; i++)
+		{
+			process_y->Add(0);
+		}
 		for (int y = 0; y < input.rows; y++)
 		{
 			for (int x = 0; x < input.cols - 1; x++)
@@ -476,54 +481,41 @@ namespace CppCLRWinformsProjekt
 			}
 		}
 		idata = input.data;
-		/*for (int x = 0; x < input.cols; x++)
+		for (int x = 0; x < input.cols; x++)
 		{
 			for (int y = 0; y < input.rows - 1; y++)
 			{
 				idata = input.data + x + y * input.cols;
 				if ((idata[0] == 0 && idata[input.cols] != 0) || (y == 0 && idata[0] != 0))
 				{
-					process_y.push_back(y);
+					process_y[y] = 1;
 				}
 				if ((idata[0] != 0 && idata[input.cols] == 0) || (y == input.cols && idata[0] != 0))
 				{
-					process_y.push_back(y);
+					process_y[y] = 1;
 				}
 			}
 
 		}
-		idata = input.data;*/
-		for (int y = 0; y < input_mat.rows; y++)
+		idata = input.data;
+		for (int x = 0; x < input.cols; x++)
 		{
-			for (int x = 0; x < input_mat.cols; x++)
+			if (process_x[x])
 			{
-				/*for (int i = 0; i < box.size(); i++)
+				for (int i = 0; i < input.rows; i++)
 				{
-					if (y > box[i].top && y < box[i].down)
-					{
-						if (x > box[i].left && x < box[i].right)
-						{
-							pdata[0] = 255;
-						}
-						else
-						{
-							pdata[0] = 0;
-						}
-					}
-				}*/
+					pdata[x + i * input.cols] = 255;
+				}
+			}
+		}
+		for (int y = 0; y < input.rows; y++)
+		{
+			if (process_y[y])
+			{
 				for (int i = 0; i < input.cols; i++)
 				{
-					if (process_x[x])
-					{
-						pdata[0] = 255;
-					}
-					else
-					{
-						pdata[0] = 0;
-					}
+					pdata[y * input.cols + i] = 255;
 				}
-
-				pdata += 1;
 			}
 		}
 		return process;
