@@ -74,8 +74,8 @@ namespace CppCLRWinformsProjekt
 	private: System::ComponentModel::IContainer^ components;
 	private: Bitmap^ gray;
 	private: System::Windows::Forms::PictureBox^ pictureBox4;
-	private: System::Windows::Forms::PictureBox^ pictureBox5;
-	private: System::Windows::Forms::PictureBox^ pictureBox6;
+
+
 	private: ColorPalette^ cp;
 
 	protected:
@@ -103,14 +103,10 @@ namespace CppCLRWinformsProjekt
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->pictureBox4 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox5 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox6 = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button1
@@ -146,9 +142,9 @@ namespace CppCLRWinformsProjekt
 			// pictureBox1
 			// 
 			this->pictureBox1->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox1->Location = System::Drawing::Point(13, 77);
+			this->pictureBox1->Location = System::Drawing::Point(13, 76);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(172, 300);
+			this->pictureBox1->Size = System::Drawing::Size(300, 300);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
@@ -156,9 +152,9 @@ namespace CppCLRWinformsProjekt
 			// pictureBox2
 			// 
 			this->pictureBox2->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox2->Location = System::Drawing::Point(191, 76);
+			this->pictureBox2->Location = System::Drawing::Point(319, 76);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(206, 300);
+			this->pictureBox2->Size = System::Drawing::Size(300, 300);
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox2->TabIndex = 4;
 			this->pictureBox2->TabStop = false;
@@ -166,12 +162,13 @@ namespace CppCLRWinformsProjekt
 			// pictureBox3
 			// 
 			this->pictureBox3->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox3->Location = System::Drawing::Point(403, 76);
+			this->pictureBox3->Location = System::Drawing::Point(625, 76);
 			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(203, 300);
+			this->pictureBox3->Size = System::Drawing::Size(300, 300);
 			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox3->TabIndex = 5;
 			this->pictureBox3->TabStop = false;
+			this->pictureBox3->Click += gcnew System::EventHandler(this, &Form1::pictureBox3_Click);
 			// 
 			// openFileDialog1
 			// 
@@ -189,33 +186,11 @@ namespace CppCLRWinformsProjekt
 			this->pictureBox4->TabIndex = 0;
 			this->pictureBox4->TabStop = false;
 			// 
-			// pictureBox5
-			// 
-			this->pictureBox5->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox5->Location = System::Drawing::Point(612, 76);
-			this->pictureBox5->Name = L"pictureBox5";
-			this->pictureBox5->Size = System::Drawing::Size(138, 300);
-			this->pictureBox5->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox5->TabIndex = 6;
-			this->pictureBox5->TabStop = false;
-			// 
-			// pictureBox6
-			// 
-			this->pictureBox6->BackColor = System::Drawing::SystemColors::ControlLightLight;
-			this->pictureBox6->Location = System::Drawing::Point(756, 76);
-			this->pictureBox6->Name = L"pictureBox6";
-			this->pictureBox6->Size = System::Drawing::Size(170, 300);
-			this->pictureBox6->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox6->TabIndex = 7;
-			this->pictureBox6->TabStop = false;
-			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(938, 393);
-			this->Controls->Add(this->pictureBox6);
-			this->Controls->Add(this->pictureBox5);
 			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->pictureBox1);
@@ -229,8 +204,6 @@ namespace CppCLRWinformsProjekt
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox4))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox5))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox6))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -248,7 +221,7 @@ namespace CppCLRWinformsProjekt
 			vc = cv::VideoCapture(s);
 			fps = vc.get(cv::CAP_PROP_FPS);
 			frame_counts = vc.get(cv::CAP_PROP_FRAME_COUNT);
-			timer1->Interval = 1;
+			timer1->Interval = 1000 / fps;
 			first_image.release();
 			last_image.release();
 		}
@@ -306,7 +279,7 @@ namespace CppCLRWinformsProjekt
 			for (int x = 0; x < process.cols; x++)
 			{
 				data = abs(idata[0] - fdata[0]);
-				if (data > 40)
+				if (data > 60)
 				{
 					data = 255;
 				}
@@ -320,6 +293,7 @@ namespace CppCLRWinformsProjekt
 				idata++;
 			}
 		}
+		process = DrawBox(process.clone());
 		output_2 = process.clone();
 	}
 	private: void WTF(cv::Mat input)
@@ -334,7 +308,7 @@ namespace CppCLRWinformsProjekt
 			for (int x = 0; x < process.cols; x++)
 			{
 				data = abs(idata[0] - ldata[0]);
-				if (data > 30)
+				if (data > 60)
 				{
 					data = 255;
 				}
@@ -352,169 +326,128 @@ namespace CppCLRWinformsProjekt
 		process = DrawBox(process.clone());
 		output_3 = process;
 	}
-	private: std::vector<Box>CreateBox(std::vector<int>process_x, std::vector<int>process_y, cv::Mat input)
+	private: cv::Mat DrawBox(cv::Mat input/*, std::vector<Box>box*/)
 	{
-		button3->Text = "CreateBox";
-		std::vector<Box>boxes;
-		int ii = -1, jj = -1;
-		for (int i = 0; i < process_x.size(); i++)
-		{
-			for (int j = i; j < process_x.size(); j++)
-			{
-				for (int x = process_x[i]; x < process_x[j]; x++)
-				{
-					for (int y = 0; y < input.rows; y++)
-					{
-						if (input.data[y * input.cols + x] != 0 && ii != i && jj != j)
-						{
-							Box box(0, 0, process_x[i], process_x[j]);
-							boxes.push_back(box);
-							ii = i;
-							jj = j;
-						}
-					}
-				}
-			}
-		}
-		ii = -1, jj = -1;
-		for (int i = 0; i < process_y.size(); i++)
-		{
-			for (int j = i; j < process_y.size(); j++)
-			{
-				for (int k = 0; k < boxes.size(); k++)
-				{
-					for (int x = boxes[k].left; x < boxes[k].right; x++)
-					{
-						for (int y = process_y[i]; y < process_y[j]; y++)
-						{
-							if (input.data[y * input.cols + x] != 0 && ii != i && jj != j)
-							{
-								boxes[k].top = process_y[i];
-								boxes[k].down = process_y[j];
-							}
-						}
-					}
-				}
-			}
-		}
-		return boxes;
-	}
-	private: std::vector<Box> Scanner(cv::Mat& input)
-	{
-		button3->Text = "Scanner";
-		std::vector<Box> boxes;
-		std::vector<int>process_x;
-		std::vector<int>process_y;
+		button3->Text = "drawbox";
+		auto process = input.clone();
 		auto idata = input.data;
-
-
-		for (int y = 0; y < input.rows; y++)
+		auto pdata = process.data;
+		List<bool>^ processX = gcnew List<bool>();
+		List<bool>^ processY = gcnew List<bool>();
+		auto axis_x = gcnew List<int>();
+		auto axis_y = gcnew List<int>();
+		std::vector<Box>boxes;
+		for (int x = 0; x < input.cols; x++)
 		{
-			for (int x = 0; x < input.cols; x++)
+			bool white_line = 0;
+			for (int y = 0; y < input.rows; y++)
 			{
-				if ((idata[0] == 0 && idata[1] != 0) || (x == 0 && idata[0] != 0))
+				if (idata[0] != 0)
 				{
-					process_y.push_back(x);
+					white_line = 1;
 				}
-				if ((idata[0] != 0 && idata[1] == 0) || (x == input.rows && idata[0] != 0))
+				idata = input.data + x + y * input.cols;
+			}
+			if (!white_line)
+			{
+				processY->Add(1);
+			}
+			else
+			{
+				processY->Add(0);
+			}
+		}
+		for (int i = 0; i < processY->Count - 1; i++)
+		{
+			if (i == 0)
+			{
+				if (!processY[i])
 				{
-					process_y.push_back(x);
+					axis_y->Add(i);
 				}
-				idata++;
+			}
+			if (i == processY->Count - 1)
+			{
+				if (!processY[i])
+				{
+					axis_y->Add(i);
+				}
+			}
+			else
+			{
+				if (processY[i] && !processY[i + 1])
+				{
+					axis_y->Add(i);
+				}
+				if (!processY[i] && processY[i + 1])
+				{
+					axis_y->Add(i);
+				}
 			}
 		}
 		idata = input.data;
+		for (int y = 0; y < axis_y->Count - 1; y += 2)
+		{
+			Box box(0, 0, axis_y[y], axis_y[y + 1]);
+			boxes.push_back(box);
+		}
+		for (int i = 0; i < boxes.size(); i++)
+		{
+			bool done = 0;
+			for (int y = 0; y < input.rows; y++)
+			{
+
+				for (int x = boxes[i].left; x < boxes[i].right; x++)
+				{
+					if (!done)
+					{
+						if (idata[x + y * input.cols] != 0)
+						{
+							boxes[i].top = y;
+							done = 1;
+						}
+					}
+				}
+			}
+			done = 0;
+			for (int y = input.rows - 1; y >= 0; y--)
+			{
+
+				for (int x = boxes[i].left; x < boxes[i].right; x++)
+				{
+					if (!done)
+					{
+						if (idata[x + y * input.cols] != 0)
+						{
+							boxes[i].down = y;
+							done = 1;
+						}
+					}
+				}
+			}
+		}
+
 		for (int x = 0; x < input.cols; x++)
 		{
 			for (int y = 0; y < input.rows; y++)
 			{
-				if ((idata[0] == 0 && idata[input.cols] != 0) || (y == 0 && idata[0] != 0))
+				for (int i = 0; i < boxes.size(); i++)
 				{
-					process_x.push_back(y);
-				}
-				if ((idata[0] != 0 && idata[input.cols] == 0) || (y == input.cols && idata[0] != 0))
-				{
-					process_x.push_back(y);
-				}
-				idata = input.data + x + y * input.cols;
-			}
+					if (boxes[i].top == y || boxes[i].down == y)
+					{
+						if (boxes[i].left <= x && boxes[i].right >= x)
+						{
+							pdata[x + y * input.cols] = 255;
+						}
+					}
+					if (boxes[i].left == x || boxes[i].right == x)
+					{
+						if (boxes[i].top <= y && boxes[i].down >= y)
+						{
+							pdata[x + y * input.cols] = 255;
+						}
+					}
 
-		}
-		std::sort(process_x.begin(), process_x.end());
-		std::sort(process_y.begin(), process_y.end());
-
-		boxes = CreateBox(process_x, process_y, input);
-
-
-		return boxes;
-	}
-	private: cv::Mat DrawBox(cv::Mat input_mat/*, std::vector<Box>box*/)
-	{
-		button3->Text = "drawbox";
-		auto process = input_mat.clone();
-		auto idata = input_mat.data;
-		auto pdata = process.data;
-		List<bool>^ process_x = gcnew List<bool>();
-		List<bool>^ process_y = gcnew List<bool>();
-
-		for (int i = 0; i < input.cols; i++)
-		{
-			process_x->Add(0);
-		}
-		for (int i = 0; i < input.rows; i++)
-		{
-			process_y->Add(0);
-		}
-		for (int y = 0; y < input.rows; y++)
-		{
-			for (int x = 0; x < input.cols - 1; x++)
-			{
-				if ((idata[0] == 0 && idata[1] != 0) || (x == 0 && idata[0] != 0))
-				{
-					process_x[x] = 1;
-				}
-				if ((idata[0] != 0 && idata[1] == 0) || (x == input.rows && idata[0] != 0))
-				{
-					process_x[x] = 1;
-				}
-				idata++;
-			}
-		}
-		idata = input.data;
-		for (int x = 0; x < input.cols; x++)
-		{
-			for (int y = 0; y < input.rows - 1; y++)
-			{
-				idata = input.data + x + y * input.cols;
-				if ((idata[0] == 0 && idata[input.cols] != 0) || (y == 0 && idata[0] != 0))
-				{
-					process_y[y] = 1;
-				}
-				if ((idata[0] != 0 && idata[input.cols] == 0) || (y == input.cols && idata[0] != 0))
-				{
-					process_y[y] = 1;
-				}
-			}
-
-		}
-		idata = input.data;
-		for (int x = 0; x < input.cols; x++)
-		{
-			if (process_x[x])
-			{
-				for (int i = 0; i < input.rows; i++)
-				{
-					pdata[x + i * input.cols] = 255;
-				}
-			}
-		}
-		for (int y = 0; y < input.rows; y++)
-		{
-			if (process_y[y])
-			{
-				for (int i = 0; i < input.cols; i++)
-				{
-					pdata[y * input.cols + i] = 255;
 				}
 			}
 		}
@@ -578,6 +511,9 @@ namespace CppCLRWinformsProjekt
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		Reset();
+	}
+	private: System::Void pictureBox3_Click(System::Object^ sender, System::EventArgs^ e)
+	{
 	}
 	};
 
