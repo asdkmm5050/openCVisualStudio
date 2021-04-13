@@ -1,17 +1,8 @@
 ﻿#include<opencv/cv.hpp>
 #include<vector>
 #include <algorithm> 
+#include"box.h"
 #pragma once
-class Box
-{
-public:
-	int top;
-	int down;
-	int left;
-	int right;
-	Box(int, int, int, int);
-	~Box();
-};
 Box::Box(int a, int b, int c, int d)
 {
 	this->top = a;
@@ -359,21 +350,25 @@ namespace CppCLRWinformsProjekt
 		process = Boxer(process.clone());
 		output_3 = process;
 	}
-	private: List<List<int>^>^ Scanner(cv::Mat& input)
+	private: std::vector<std::vector<int>> Scanner(cv::Mat& input)
 	{
-		List<List<int>^>^ axis = gcnew List<List<int>^>();
+		std::vector<std::vector<int>> boxes;
+		std::vector<int>process_x;
+		std::vector<int>process_y;
 		auto idata = input.data;
+
+
 		for (int y = 0; y < input.rows; y++)
 		{
 			for (int x = 0; x < input.cols; x++)
 			{
-				if (idata[0] == 0 && idata[1] > 0)
+				if ((idata[0] == 0 && idata[1] != 0) || (x == 0 && idata[0] != 0))
 				{
-					Box box(0, 0, 0, 0);
+					process_y.push_back(x);
 				}
-				if (idata[0] > 0 && idata[1] == 0)
+				if ((idata[0] != 0 && idata[1] == 0) || (x == input.rows && idata[0] != 0))
 				{
-
+					process_y.push_back(x);
 				}
 				idata++;
 			}
@@ -383,11 +378,21 @@ namespace CppCLRWinformsProjekt
 		{
 			for (int y = 0; y < input.rows; y++)
 			{
-				idata = input.data + y * input.cols + x;
+				if ((idata[0] == 0 && idata[input.cols] != 0) || (y == 0 && idata[0] != 0))
+				{
+					process_x.push_back(y);
+				}
+				if ((idata[0] != 0 && idata[input.cols] == 0) || (y == input.cols && idata[0] != 0))
+				{
+					process_x.push_back(y);
+				}
+				idata = input.data + x + y * input.cols;
 			}
+
 		}
 
-		return axis;
+
+		return boxes;
 	}
 	private: cv::Mat Boxer(cv::Mat input_mat/*, std::vector<Box>box*/)
 	{
@@ -419,7 +424,7 @@ namespace CppCLRWinformsProjekt
 				pdata += 1;
 			}
 		}
-		
+
 		return process;
 	}
 		   //-------------------------------------------------------------------------自動生成-------------------------------------------------------------
@@ -482,4 +487,6 @@ namespace CppCLRWinformsProjekt
 		Reset();
 	}
 	};
+
 }
+
